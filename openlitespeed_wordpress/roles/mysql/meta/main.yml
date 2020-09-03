@@ -5,12 +5,12 @@ galaxy_info:
   author: Cold-Egg
   description: sql database
   license: "license (BSD, MIT)"
-  min_ansible_version: 2.6
+  min_ansible_version: 2.9
   platforms:
     - name: Ubuntu
       versions:
         - Focal
         - bionic
   galaxy_tags:
-    - SQL
-    - DB
+    - sql
+    - db

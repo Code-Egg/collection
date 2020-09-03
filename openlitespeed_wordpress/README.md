@@ -1,28 +1,34 @@
-# Ansible Collection - Code_Egg.openlitespeed_wordpress
+# OpenLiteSpeed WordPress Collection for Ansible
 [![Build Status](https://travis-ci.com/Code-Egg/ansible-lomp-wp.svg?branch=master)](https://github.com/Code-Egg/ansible-lomp-wp)
 
-This playbook will install a WordPress website on top of a LOMP environment (Linux, OpenLiteSpeed, MySQL and PHP) on an Ubuntu machine. A virtualhost will be created with the options specified in the vars/default.yml variable file.
+This collection contains:
+  - [WordPress](https://wordpress.org/)
+  - [OpenLiteSpeed](https://openlitespeed.org/)
+  - [MySQL](https://www.mysql.com/)
+  - [PHP](https://www.litespeedtech.com/open-source/litespeed-sapi/php)
 
-## Running this Playbook
-### 1. Install Ansible
-1. Install ansible on center server
+Supports on an Ubuntu system. A virtualhost will be created with the options specified in the vars/default.yml variable file.
+
+## Usage
+### 1. Environment
+Install ansible on center server
 ```
 apt update && apt install ansible -y
 ```
-2. Add SSH key to the client server so center server can ssh in without password
-### 2. Obtain the playbook
-Download the git repo
+Add SSH key to the client/node server so center server can ssh to it without password
+
+### 2. Install this collection
 ```
-git clone https://github.com/Code-Egg/ansible-lomp-wp.git
-cd ansible-lomp-wp
+ansible-galaxy collection install code_egg.openlitespeed_wordpress
 ```
+
 ### 3. Customize Options
 Update `example.com` from inventory to your client server's domain/IP
 ```
 vim inventory
 ```
 
-Update SQL, Domain, Port from vars/default.yml
+Update SQL password, Domain name ..etc, from vars/default.yml
 ```
 vim vars/default.yml
 ```
@@ -55,6 +61,7 @@ doc_root: "/var/www/{{ http_host }}"
 ssl_key: "/usr/local/lsws/admin/conf/webadmin.key"
 ssl_crt: "/usr/local/lsws/admin/conf/webadmin.crt"
 ```
+
 ### 4. Run ansible playbook
 ```command
 ansible-playbook playbook.yml

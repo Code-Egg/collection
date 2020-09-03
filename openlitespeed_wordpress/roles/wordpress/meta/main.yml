@@ -5,7 +5,7 @@ galaxy_info:
   author: Cold-Egg
   description: WordPress Application
   license: "license (BSD, MIT)"
-  min_ansible_version: 2.6
+  min_ansible_version: 2.9
   platforms:
     - name: Ubuntu
       versions:

@@ -5,7 +5,7 @@ galaxy_info:
   author: Cold-Egg
   description: OpenLiteSpeed Web Server
   license: "license (BSD, MIT)"
-  min_ansible_version: 2.6
+  min_ansible_version: 2.9
   platforms:
     - name: Ubuntu
       versions:
@@ -13,5 +13,6 @@ galaxy_info:
         - bionic
   galaxy_tags:
     - openlitespeed
-    - HTTP
-    - HTTPS
+    - web server
+    - http
+    - https
