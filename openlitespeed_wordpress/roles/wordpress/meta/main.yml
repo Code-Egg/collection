@@ -1,0 +1,17 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: Cold-Egg
+  description: WordPress Application
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.6
+  platforms:
+    - name: Ubuntu
+      versions:
+        - Focal
+        - bionic
+  galaxy_tags:
+    - web
+    - openlitespeed
+    - webserver
