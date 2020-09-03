@@ -1,0 +1,32 @@
+#!/bin/bash
+DOCHM="{{ doc_root }}"
+
+get_theme_name(){
+    THEME_NAME=$(grep WP_DEFAULT_THEME ${DOCHM}/wp-includes/default-constants.php | grep -v '!' | awk -F "'" '{print $4}')
+    echo "${THEME_NAME}" | grep 'twenty' >/dev/null 2>&1
+    if [ ${?} = 0 ]; then
+        THEME="${THEME_NAME}"
+    fi
+}
+
+set_lscache(){ 
+    if [ ! -f ${DOCHM}/wp-content/themes/${THEME}/functions.php.bk ]; then 
+        cp ${DOCHM}/wp-content/themes/${THEME}/functions.php ${DOCHM}/wp-content/themes/${THEME}/functions.php.bk
+        cked
+        ed ${DOCHM}/wp-content/themes/${THEME}/functions.php << END >>/dev/null 2>&1
+2i
+require_once( WP_CONTENT_DIR.'/../wp-admin/includes/plugin.php' );
+\$path = 'litespeed-cache/litespeed-cache.php' ;
+if (!is_plugin_active( \$path )) {
+    activate_plugin( \$path ) ;
+    rename( __FILE__ . '.bk', __FILE__ );
+}
+.
+w
+q
+END
+    fi
+}
+
+get_theme_name
+set_lscache

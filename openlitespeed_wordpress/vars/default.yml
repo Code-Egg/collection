@@ -1,0 +1,33 @@
+---
+# System Settings
+owner: www-data
+group: www-data
+
+#PHP Settings
+php_version: "74"
+php_dversion: "7.4"
+php_opt_modules: 
+  - "curl"
+  - "imagick"
+  - "intl"
+  - "opcache"
+  - "memcached"
+  - "tidy"
+php_memory_limit: "128"
+php_max_execution_time: "60"
+php_upload_max_filesize: "128M"
+php_post_max_size: "128M"
+
+#MySQL Settings
+mysql_root_password: "mysql_root_password"
+mysql_db: "wordpress"
+mysql_user: "egguser"
+mysql_password: "password"
+
+#HTTP Settings
+http_host: "example.com"
+http_port: "80"
+https_port: "443"
+doc_root: "/var/www/{{ http_host }}"
+ssl_key: "/usr/local/lsws/admin/conf/webadmin.key"
+ssl_crt: "/usr/local/lsws/admin/conf/webadmin.crt"

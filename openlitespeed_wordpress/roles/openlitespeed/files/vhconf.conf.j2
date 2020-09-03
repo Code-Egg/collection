@@ -1,0 +1,47 @@
+docRoot {{ doc_root }}/
+enableGzip 1
+
+context / {
+  allowBrowse 1
+  location $DOC_ROOT/
+  rewrite  {
+    RewriteFile .htaccess
+  }
+}
+
+index  {
+  useServer               1
+  indexFiles              index.php, index.html
+  autoIndex               0
+  autoIndexURI            /_autoindex/default.php
+}
+
+errorPage 404{
+  url /error404.html
+}
+
+errorlog $VH_ROOT/logs/error.log{
+  logLevel DEBUG
+  rollingSize 10M
+  useServer 1
+}
+
+accessLog $VH_ROOT/logs/access.log{
+  compressArchive 0
+  logReferer 1
+  keepDays 7
+  rollingSize 10M
+  logUserAgent 1
+  useServer 0
+}
+
+rewrite  {
+  enable                  1
+  autoLoadHtaccess        1
+  logLevel                0
+}
+
+accessControl {
+  deny
+  allow *
+}

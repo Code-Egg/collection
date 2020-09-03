@@ -1,0 +1,13 @@
+---
+php_version: "74"
+php_dversion: "7.4"
+php_opt_modules:
+  - "curl"
+  - "imagick"
+  - "intl"
+  - "opcache"
+  - "memcached"
+  - "tidy"
+php_memory_limit: "128"
+php_upload_max_filesize: "128M"
+php_post_max_size: "128M"

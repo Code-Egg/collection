@@ -1,0 +1,9 @@
+---
+owner: www-data
+group: www-data
+http_host: "example.com"
+http_port: "80"
+https_port: "443"
+doc_root: "/var/www/{{ http_host }}"
+ssl_key: "/usr/local/lsws/admin/conf/webadmin.key"
+ssl_crt: "/usr/local/lsws/admin/conf/webadmin.crt"

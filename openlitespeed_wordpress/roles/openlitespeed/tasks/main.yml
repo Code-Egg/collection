@@ -1,0 +1,53 @@
+---
+- name: Create document root
+  file:
+    path: "{{ doc_root }}"
+    state: directory
+    owner: "{{ owner }}"
+    group: "{{ group }}"
+    mode: '0755'
+  tags: [ openlitespeed ]
+
+- name: Install LiteSpeed repository
+  shell: |
+    set -o pipefail
+    wget -O - http://rpms.litespeedtech.com/debian/enable_lst_debian_repo.sh | bash
+  args:
+    executable: /bin/bash
+  changed_when: false
+
+- name: Install OpenLiteSpeed Package
+  apt: name=openlitespeed update_cache=true state=present
+  changed_when: false
+  tags: [ system ]
+
+- name: Set up openlitespeed ServerConf
+  template:
+    src: "files/httpd-config.conf.j2"
+    dest: "/usr/local/lsws/conf/httpd_config.conf"
+    force: yes
+    owner: "lsadm"
+    mode: '0750'
+  tags: [ openlitespeed ]
+
+- name: Setup openlitespeed VirtualHost
+  template:
+    src: "files/vhconf.conf.j2"
+    dest: "/usr/local/lsws/conf/vhosts/Example/vhconf.conf"
+    force: yes
+    owner: "lsadm"
+    mode: '0750'
+  tags: [ openlitespeed ]
+
+- name: Setup PLAT name
+  shell: echo "ansible" > /usr/local/lsws/PLAT
+  changed_when: false
+  tags: [ openlitespeed ]
+
+- name: reinstall openlitespeed
+  shell: |
+    DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::='--force-confdef' \
+    -o Dpkg::Options::='--force-confold' -y install --reinstall openlitespeed
+  notify: Restart lsws
+  changed_when: false
+  tags: [ openlitespeed ]

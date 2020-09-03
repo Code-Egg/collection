@@ -1,0 +1,55 @@
+---
+- name: Install LiteSpeed repository
+  shell: |
+    set -o pipefail
+    wget -O - http://rpms.litespeedtech.com/debian/enable_lst_debian_repo.sh | bash
+  args:
+    executable: /bin/bash
+  changed_when: false
+
+- name: Install PHP Packages
+  apt: name={{ item }} update_cache=yes state=present
+  loop: [ 'lsphp{{ php_version }}', 'lsphp{{ php_version }}-mysql', 'lsphp{{ php_version }}-common', 'lsphp{{ php_version }}-json' ]
+  tags: [ system ]
+
+- name: Install PHP Extensions
+  apt: name=lsphp{{ php_version }}-{{ item }} update_cache=yes state=present
+  loop: "{{ php_opt_modules }}"
+  tags: [ system ]
+
+- name: Set php_memory_limit
+  become: true
+  lineinfile:
+    dest: /usr/local/lsws/lsphp{{ php_version }}/etc/php/{{ php_dversion }}/litespeed/php.ini
+    regexp: "memory_limit ="
+    line: "memory_limit = {{ php_memory_limit }}"
+    mode: '0644'
+
+- name: Set max_execution_time
+  become: true
+  lineinfile:
+    dest: /usr/local/lsws/lsphp{{ php_version }}/etc/php/{{ php_dversion }}/litespeed/php.ini
+    regexp: "max_execution_time ="
+    line: "max_execution_time = {{ php_max_execution_time }}"
+    mode: '0644'
+
+- name: Set upload_max_filesize
+  become: true
+  lineinfile:
+    dest: /usr/local/lsws/lsphp{{ php_version }}/etc/php/{{ php_dversion }}/litespeed/php.ini
+    regexp: "upload_max_filesize ="
+    line: "upload_max_filesize = {{ php_upload_max_filesize }}"
+    mode: '0644'
+
+- name: Set post_max_size
+  become: true
+  lineinfile:
+    dest: /usr/local/lsws/lsphp{{ php_version }}/etc/php/{{ php_dversion }}/litespeed/php.ini
+    regexp: "post_max_size ="
+    line: "post_max_size = {{ php_post_max_size }}"
+    mode: '0644'
+
+- name: clean up socket
+  file:
+    state: absent
+    path: "/tmp/lshttpd/"
