@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.com/Code-Egg/ansible-lomp-wp.svg?branch=master)](https://github.com/Code-Egg/ansible-lomp-wp)
 
 This collection contains:
+
   - [WordPress](https://wordpress.org/)
   - [OpenLiteSpeed](https://openlitespeed.org/)
   - [MySQL](https://www.mysql.com/)
@@ -41,7 +42,13 @@ group: www-data
 #PHP Settings
 php_version: "74"
 php_dversion: "7.4"
-php_opt_modules: [ 'lsphp{{ php_version }}-curl', 'lsphp{{ php_version }}-imagick', 'lsphp{{ php_version }}-intl', 'lsphp{{ php_version }}-opcache', 'lsphp{{ php_version }}-memcached', 'lsphp{{ php_version }}-tidy' ]
+php_opt_modules: 
+  - "curl"
+  - "imagick"
+  - "intl"
+  - "opcache"
+  - "memcached"
+  - "tidy"
 php_memory_limit: "128"
 php_max_execution_time: "60"
 php_upload_max_filesize: "128M"
@@ -54,7 +61,7 @@ mysql_user: "egguser"
 mysql_password: "password"
 
 #HTTP Settings
-http_host: "your_domain"
+http_host: "example.com"
 http_port: "80"
 https_port: "443"
 doc_root: "/var/www/{{ http_host }}"
@@ -65,4 +72,36 @@ ssl_crt: "/usr/local/lsws/admin/conf/webadmin.crt"
 ### 4. Run ansible playbook
 ```command
 ansible-playbook playbook.yml
+```
+
+## Structure
+
+```
+├── README.md
+├── ansible.cfg
+├── galaxy.yml
+├── inventory
+├── playbook.yml
+├── plugins
+├── roles
+│   ├── mysql
+│   │   ├── defaults
+│   │   ├── meta
+│   │   └── tasks
+│   ├── openlitespeed
+│   │   ├── defaults
+│   │   ├── files
+│   │   ├── handlers
+│   │   ├── meta
+│   │   └── tasks
+│   ├── php
+│   │   ├── defaults
+│   │   ├── meta
+│   │   └── tasks
+│   └── wordpress
+│       ├── files
+│       ├── meta
+│       └── tasks
+└── vars
+    └── default.yml
 ```
