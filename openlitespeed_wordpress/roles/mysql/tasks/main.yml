@@ -31,7 +31,7 @@
       password={{ mysql_root_password }}
   tags: [ mysql, mysql-root ]
 
-- name: Set MySql root password for 127.0.0.1, ::1
+- name: Set MySql root password for localhost
   mysql_user:
     name: root
     password: "{{ mysql_root_password }}"
@@ -41,8 +41,7 @@
     login_unix_socket: "/var/run/mysqld/mysqld.sock"
     state: present
   with_items:
-    - ::1
-    - 127.0.0.1
+    - localhost
   when: root_pwd_check.rc == 0
   tags: [ mysql, mysql-root ]
 
