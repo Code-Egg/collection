@@ -1,2 +1,4 @@
 [server]
 example.com ansible_port=22 ansible_user=root
+### Other example
+# example.com ansible_port=22 ansible_user=root ansible_sudo_pass=yourrootpassword ansible_ssh_user=root ansible_connection=local
