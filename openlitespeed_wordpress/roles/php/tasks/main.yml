@@ -9,7 +9,7 @@
 
 - name: Install PHP Packages
   apt: name={{ item }} update_cache=yes state=present
-  loop: [ 'lsphp{{ php_version }}', 'lsphp{{ php_version }}-mysql', 'lsphp{{ php_version }}-common', 'lsphp{{ php_version }}-json' ]
+  loop: [ 'lsphp{{ php_version }}', 'lsphp{{ php_version }}-mysql', 'lsphp{{ php_version }}-common' ]
   tags: [ system ]
 
 - name: Install PHP Extensions
