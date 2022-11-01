@@ -1,7 +1,7 @@
 ---
 - name: Install MySql Packages
   apt: name={{ item }} update_cache=yes state=present
-  loop: [ 'mysql-server', 'python3-pymysql' ]
+  loop: [ 'mysql-server', 'python3-pip', 'python3-mysqldb' ]
   tags: [ mysql, system ]
 
 - name: Check if root password is set
