@@ -9,8 +9,7 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - Focal
-        - bionic
+        - all
   galaxy_tags:
     - web
     - openlitespeed

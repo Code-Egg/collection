@@ -40,14 +40,13 @@ owner: www-data
 group: www-data
 
 #PHP Settings
-php_version: "74"
-php_dversion: "7.4"
+php_version: "81"
+php_dversion: "8.1"
 php_opt_modules: 
   - "curl"
   - "imagick"
   - "intl"
   - "opcache"
-  - "memcached"
   - "tidy"
 php_memory_limit: "128"
 php_max_execution_time: "60"

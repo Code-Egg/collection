@@ -6,7 +6,6 @@ php_opt_modules:
   - "imagick"
   - "intl"
   - "opcache"
-  - "memcached"
   - "tidy"
 php_memory_limit: "256"
 php_upload_max_filesize: "128M"
