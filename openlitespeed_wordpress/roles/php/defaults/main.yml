@@ -7,6 +7,7 @@ php_opt_modules:
   - "intl"
   - "opcache"
   - "tidy"
+php_max_execution_time: "120"
 php_memory_limit: "256"
 php_upload_max_filesize: "128M"
 php_post_max_size: "128M"
