@@ -81,6 +81,8 @@ ansible-playbook playbook.yml
 ├── galaxy.yml
 ├── inventory
 ├── playbook.yml
+├── meta
+│   └── runtime.yml
 ├── plugins
 ├── roles
 │   ├── mysql
